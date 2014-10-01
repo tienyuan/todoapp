@@ -18,3 +18,5 @@
 *Ignore all sublime files
 *.sublime-project
 *.sublime-workspace
+# Ignore application configuration
+/config/application.yml

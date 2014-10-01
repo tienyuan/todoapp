@@ -34,6 +34,7 @@ end
 
 gem 'devise'
 gem 'pundit'
+gem 'figaro'
 
 group :development, :test do
   gem 'rspec-rails'
