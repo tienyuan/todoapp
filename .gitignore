@@ -21,4 +21,3 @@
 
 # Ignore application configuration
 /config/application.yml
-/config/initializers/secret_token.rb
