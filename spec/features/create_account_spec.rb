@@ -5,9 +5,9 @@ describe "Creating an user workflow" do
   describe "successful" do
     it "creates an user" do
       visit root_path
-      click_link "Sign up"
-      fill_in 'Username', with: user.username
+      click_link "Sign Up"
       fill_in 'Email', with: user.email
+      fill_in 'Username', with: user.username
       fill_in 'Password', with: user.password
       fill_in 'Password Confirmation', with: user.password
 
