@@ -17,7 +17,7 @@ describe "task workflows" do
       fill_in 'Description', with: "some task description here"
 
       within 'form' do
-        click_button 'Create'
+        click_button 'Submit'
       end
       expect( page ).to have_content('Todo created!')
     end
