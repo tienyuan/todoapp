@@ -1,4 +1,8 @@
 Todoapp::Application.routes.draw do
+  get "tasks/index"
+  get "tasks/show"
+  get "tasks/new"
+  get "tasks/edit"
   resources :tasks
 
   devise_for :users
