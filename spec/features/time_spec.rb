@@ -18,7 +18,6 @@ describe "task workflows" do
     end
   end
 
-
   after do
     Warden.test_reset!
   end

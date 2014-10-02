@@ -46,6 +46,7 @@ group :development, :test do
   gem 'sqlite3'
   gem 'pry'
   gem 'pry-rails'
+  gem 'timecop'
 end
 
 group :production do

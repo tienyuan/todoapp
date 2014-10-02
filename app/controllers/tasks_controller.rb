@@ -36,6 +36,18 @@ respond_to :html, :js
     end
   end
 
+  def destroy
+    @task = Task.find(params[:id])
+
+    if @task.destroy
+      flash[:notice] = "Todo was deleted successfully."
+      redirect_to tasks_path
+    else
+      flash[:error] = "There was an error deleting the todo."
+      redirect_to tasks_path
+    end
+  end
+
   private
 
   def task_params
