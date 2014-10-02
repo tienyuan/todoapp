@@ -1,21 +1,19 @@
 require 'rails_helper'
 
-describe "create a task workflow" do
+describe "create task workflow" do
 
-  describe "successful" do
-    it "redirects to the task index" do
-    user = create(:user)
-    visit root_path
+  describe "new task" do
+    it "shows form" do
+      @user = create(:user)
+      current_user = @user
+      visit tasks_path
+      click_link "Create a New Todo"
+      fill_in 'Description', with: "some task description here"
 
-    click_link 'Sign In'
-    fill_in 'Email', with: user.email
-    fill_in 'Password', with: user.password
-
-    within 'form' do
-      click_button 'Sign in'
-    end
-
-    expect(current_path).to eq root_path #when there's a task index, change to tasks_path
+      within 'form' do
+        click_button 'Create'
+      end
+      expect( page ).to have_content('Task created!')
     end
   end
 end
