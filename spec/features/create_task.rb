@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "Sign in workflow" do
+describe "create a task workflow" do
 
   describe "successful" do
     it "redirects to the task index" do
@@ -15,7 +15,7 @@ describe "Sign in workflow" do
       click_button 'Sign in'
     end
 
-    expect(current_path).to eq tasks_path #when there's a task index, change to tasks_path
+    expect(current_path).to eq root_path #when there's a task index, change to tasks_path
     end
   end
 end
