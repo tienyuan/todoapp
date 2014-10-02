@@ -22,12 +22,19 @@ class TasksController < ApplicationController
   end
 
   def edit
+    @task = Task.find(params[:id])
+    
+    if @task.update_attributes(task_params)
+      redirect_to tasks_path, notice: "Todo completed!"
+    else
+      redirect_to tasks_path, notice: "Error completing todo. Please try again."
+    end
   end
 
   private
 
   def task_params
-    params.require(:task).permit(:description)
+    params.require(:task).permit(:description, :completed)
   end
 
 end
