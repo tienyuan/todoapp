@@ -2,19 +2,29 @@ require 'rails_helper'
 
 describe "Creating an user workflow" do
 
+  include Warden::Test::Helpers
+  Warden.test_mode!
+
   describe "successful" do
     it "creates an user" do
       visit root_path
       click_link "Sign Up"
-      fill_in 'Email', with: user.email
-      fill_in 'Username', with: user.username
-      fill_in 'Password', with: user.password
-      fill_in 'Password Confirmation', with: user.password
+      fill_in 'Email', with: "createusertest@example.com"
+      fill_in 'Username', with: "createusername"
+      fill_in 'Password', with: "password"
+      fill_in 'Password confirmation', with: "password"
 
       within 'form' do
         click_button 'Sign up'
       end
-      expect( page ).to have_content('Thanks for creating an account!')
+      
+      login_as(@user, :scope => :user)
+      expect(current_path).to eq(tasks_path)
     end
   end
+
+  after do
+    Warden.test_reset!
+  end
+
 end
