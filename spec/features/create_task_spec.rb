@@ -19,7 +19,7 @@ describe "create task workflow" do
       within 'form' do
         click_button 'Create'
       end
-      expect( page ).to have_content('Task created!')
+      expect( page ).to have_content('Todo created!')
     end
   end
 
