@@ -1,4 +1,6 @@
 class TasksController < ApplicationController
+respond_to :html, :js
+
   def index
     @tasks = current_user.tasks
   end
@@ -22,10 +24,13 @@ class TasksController < ApplicationController
   end
 
   def edit
+  end
+
+  def update
     @task = Task.find(params[:id])
     
     if @task.update_attributes(task_params)
-      redirect_to tasks_path, notice: "Todo completed!"
+      redirect_to tasks_path, notice: "Todo updated!"
     else
       redirect_to tasks_path, notice: "Error completing todo. Please try again."
     end

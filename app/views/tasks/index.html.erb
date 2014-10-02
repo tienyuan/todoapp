@@ -16,8 +16,9 @@
       <tr>
         <td><%= task.description %></td>
         <td>days left</td>
-        <td><%= form_for task do |f| %>
+        <td><%= form_for task  do |f| %>
             <%= f.check_box :completed %>
+            <%= f.submit "Go", class: "btn btn-xs", method: :update %>
         <% end %></td>
       </tr>
       <% end %>
