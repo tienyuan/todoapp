@@ -50,6 +50,10 @@ group :development, :test do
   gem 'timecop'
 end
 
+group :test do
+  gem 'email_spec'
+end
+
 group :production do
   gem 'pg'
   gem 'rails_12factor'

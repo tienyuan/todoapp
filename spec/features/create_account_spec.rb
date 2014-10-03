@@ -2,6 +2,8 @@ require 'rails_helper'
 
 describe "Creating an user workflow" do
 
+  include EmailSpec::Helpers
+  include EmailSpec::Matchers
   include Warden::Test::Helpers
   Warden.test_mode!
 
@@ -18,8 +20,17 @@ describe "Creating an user workflow" do
         click_button 'Sign up'
       end
       
-      login_as(@user, :scope => :user)
-      expect(current_path).to eq(tasks_path)
+      open_last_email
+      click_first_link_in_email
+
+      fill_in 'Email', with: "createusertest@example.com"
+      fill_in 'Password', with: "password"
+
+      within 'form' do
+        click_button 'Sign in'
+      end
+
+      expect(current_path).to eq tasks_path
     end
   end
 
