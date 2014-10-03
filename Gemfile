@@ -36,6 +36,7 @@ end
 gem 'devise'
 gem 'pundit'
 gem 'figaro'
+gem 'whenever', require: false
 
 group :development, :test do
   gem 'rspec-rails'
