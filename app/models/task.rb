@@ -8,4 +8,6 @@ class Task < ActiveRecord::Base
   def days_remaining
     ((expiration_date - Time.now)/86400).round
   end
+
+  validates :description, presence: true
 end
