@@ -2,7 +2,8 @@ class TasksController < ApplicationController
 respond_to :html, :js
 
   def index
-    @tasks = current_user.tasks
+    @tasks = current_user.try(:tasks)
+    authorize @tasks
   end
 
   def show
@@ -10,10 +11,12 @@ respond_to :html, :js
 
   def new
     @task = Task.new
+    authorize @task
   end
 
   def create
     @task = current_user.tasks.new(task_params)
+    authorize @task
 
     if @task.save
       redirect_to tasks_path, notice: "Todo created!"
@@ -28,7 +31,8 @@ respond_to :html, :js
 
   def update
     @task = Task.find(params[:id])
-    
+    authorize @task
+
     if @task.update_attributes(task_params)
       redirect_to tasks_path, notice: "Todo updated!"
     else
@@ -38,6 +42,7 @@ respond_to :html, :js
 
   def destroy
     @task = Task.find(params[:id])
+    authorize @task
 
     if @task.destroy
       flash[:notice] = "Todo was deleted successfully."
