@@ -20,8 +20,7 @@ describe "Creating an user workflow" do
         click_button 'Sign up'
       end
       
-      open_last_email
-      click_first_link_in_email
+      click_email_confirmation_link
 
       fill_in 'Email', with: "createusertest@example.com"
       fill_in 'Password', with: "password"
@@ -38,4 +37,10 @@ describe "Creating an user workflow" do
     Warden.test_reset!
   end
 
+  private
+
+  def click_email_confirmation_link
+    open_last_email
+    click_first_link_in_email
+  end
 end
