@@ -40,7 +40,7 @@ describe "Creating an user workflow" do
   private
 
   def click_email_confirmation_link
-    open_last_email
-    click_first_link_in_email
+    open_email("createusertest@example.com", with_subject: "Confirmation instructions")
+    visit_in_email("Confirm my account")
   end
 end
