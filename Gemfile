@@ -36,6 +36,7 @@ end
 gem 'devise'
 gem 'pundit'
 gem 'figaro'
+gem 'whenever', require: false
 
 group :development, :test do
   gem 'rspec-rails'
@@ -47,6 +48,10 @@ group :development, :test do
   gem 'pry'
   gem 'pry-rails'
   gem 'timecop'
+end
+
+group :test do
+  gem 'email_spec'
 end
 
 group :production do
