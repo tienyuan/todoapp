@@ -1,4 +1,6 @@
 class TasksController < ApplicationController
+respond_to :html, :js
+
   def index
     @tasks = current_user.tasks
   end
@@ -24,10 +26,32 @@ class TasksController < ApplicationController
   def edit
   end
 
+  def update
+    @task = Task.find(params[:id])
+    
+    if @task.update_attributes(task_params)
+      redirect_to tasks_path, notice: "Todo updated!"
+    else
+      redirect_to tasks_path, notice: "Error completing todo. Please try again."
+    end
+  end
+
+  def destroy
+    @task = Task.find(params[:id])
+
+    if @task.destroy
+      flash[:notice] = "Todo was deleted successfully."
+      redirect_to tasks_path
+    else
+      flash[:error] = "There was an error deleting the todo."
+      redirect_to tasks_path
+    end
+  end
+
   private
 
   def task_params
-    params.require(:task).permit(:description)
+    params.require(:task).permit(:description, :completed)
   end
 
 end
