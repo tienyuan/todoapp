@@ -1,5 +1,5 @@
 <% if @task.completed %>
-  $('.alert-row').prepend("<div class='alert alert-success'>Task completed! <button type='button' class='close' data-dismiss='alert'>&times;</button></div>");
+  $('.alert-row').prepend("<div class='alert alert-success'>Todo completed! <button type='button' class='close' data-dismiss='alert'>&times;</button></div>");
 <% else %>
   $('#task-' +<%= @task.id %>).prepend("<div class='alert alert-error'><%= flash[:error] %></div>");
 <% end %>
