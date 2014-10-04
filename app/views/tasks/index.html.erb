@@ -16,11 +16,10 @@
       <tr>
         <td><%= task.description %></td>
         <td><%= task.days_remaining %> days left</td>
-        <td><%= form_for task  do |f| %>
-            <%= f.check_box :completed %>
-            <%= f.submit "Go", class: "btn btn-xs", method: :update %>
+        <td><%= form_for task, remote: true  do |f| %>
+            <%= f.check_box 'completed', id: "task-#{task.id}", class: 'submittable' %>
         <% end %>
-            <%= link_to "Delete", [task], method: :delete %></td>
+            </td>
       </tr>
       <% end %>
     </table>

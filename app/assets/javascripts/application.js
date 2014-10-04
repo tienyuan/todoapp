@@ -15,3 +15,8 @@
 //= require turbolinks
 //= require bootstrap
 //= require_tree .
+$(document).ready(function () {
+$('.submittable').on('change', function() {
+  $(this).closest('form').submit();
+});
+});

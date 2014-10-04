@@ -30,9 +30,8 @@ respond_to :html, :js
     @task = Task.find(params[:id])
     
     if @task.update_attributes(task_params)
-      redirect_to tasks_path, notice: "Todo updated!"
     else
-      redirect_to tasks_path, notice: "Error completing todo. Please try again."
+      redirect_to tasks_path
     end
   end
 
@@ -45,6 +44,10 @@ respond_to :html, :js
     else
       flash[:error] = "There was an error deleting the todo."
       redirect_to tasks_path
+    end
+
+    respond_with(@task) do |format|
+      format.html { redirect_to tasks_path }
     end
   end
 
