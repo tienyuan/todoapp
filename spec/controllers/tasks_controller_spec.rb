@@ -24,7 +24,6 @@ describe TasksController do
       expect( @task.completed ).to eq(false)
 
       post :edit, task:{ id: @task.id, completed: true}
-      puts @task.completed
       expect( @task.completed ).to eq(true)
     end
   end
