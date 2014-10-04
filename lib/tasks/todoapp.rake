@@ -1,4 +1,4 @@
 desc "Deletes tasks older than 7 days"
-task delete_items: :environment do
-  Task.where("created_at <= ?", Time.now - 7.days).destroy_all
+task auto_delete_tasks: :environment do
+  Task.delete_tasks
 end
