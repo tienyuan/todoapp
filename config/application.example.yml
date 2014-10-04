@@ -3,7 +3,7 @@
 # --
 # Configure new developer environment by copying this file to
 # config/application.yml and adding values.
-
+SECRET_KEY_BASE:
 DEVISE_SECRET_KEY: 
 SENDGRID_USERNAME: 
 SENDGRID_PASSWORD: 

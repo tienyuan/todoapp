@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "Creating an user workflow" do
+describe "User workflow" do
 
   include EmailSpec::Helpers
   include EmailSpec::Matchers
@@ -8,6 +8,11 @@ describe "Creating an user workflow" do
   Warden.test_mode!
 
   describe "successful" do
+
+    before(:each) do
+      reset_mailer
+    end
+
     it "creates an user" do
       visit root_path
       click_link "Sign Up"
@@ -35,6 +40,7 @@ describe "Creating an user workflow" do
 
   after do
     Warden.test_reset!
+
   end
 
   private
