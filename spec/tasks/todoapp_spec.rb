@@ -11,12 +11,12 @@ describe 'todoapp rake task' do
   end
 
   let(:run_rake_task) {
-    Rake::Task[delete_items].reenable
-    Rake.application.invoke_task delete_items
+    Rake::Task[auto_delete_tasks].reenable
+    Rake.application.invoke_task auto_delete_tasks
   }
 
-  describe 'delete items' do
-    let(:delete_items) { "delete_items" }
+  describe 'auto delete items' do
+    let(:auto_delete_tasks) { "auto_delete_tasks" }
 
     it "only older than 7 days" do
       run_rake_task

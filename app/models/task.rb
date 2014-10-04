@@ -9,5 +9,9 @@ class Task < ActiveRecord::Base
     ((expiration_date - Time.now)/86400).round
   end
 
+  def self.delete_tasks
+    where("created_at <= ?", Time.now - 7.days).destroy_all
+  end
+
   validates :description, presence: true
 end
