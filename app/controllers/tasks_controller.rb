@@ -3,7 +3,7 @@ respond_to :html, :js
 
   def index
     authorize Task
-    @tasks = current_user.tasks
+    @tasks = current_user.tasks.hide_completed
   end
 
   def show

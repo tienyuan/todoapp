@@ -17,6 +17,7 @@
 //= require_tree .
 $(document).ready(function () {
 $('.submittable').on('change', function() {
+  confirm("Are you sure?");
   $(this).closest('form').submit();
 });
 });

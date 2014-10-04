@@ -1,6 +1,8 @@
 class Task < ActiveRecord::Base
   belongs_to :user
 
+  scope :hide_completed, ->{ where(completed: false) }
+
   def expiration_date
     created_at + 7.days
   end
