@@ -15,7 +15,16 @@ describe "Sign in workflow" do
       click_button 'Sign in'
     end
 
-    expect(current_path).to eq tasks_path #when there's a task index, change to tasks_path
+    expect(current_path).to eq tasks_path 
     end
   end
+  
+  describe "unsuccessful" do
+    it "reminds user to login" do
+    visit tasks_path
+
+    expect( page ).to have_content('Please sign in')
+    end
+  end
+
 end
