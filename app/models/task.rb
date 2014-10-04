@@ -13,6 +13,7 @@ class Task < ActiveRecord::Base
 
   def self.delete_tasks
     where("created_at <= ?", Time.now - 7.days).destroy_all
+    where(completed: true).destroy_all
   end
 
   validates :description, presence: true
