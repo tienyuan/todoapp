@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "Creating an user workflow" do
+describe "User workflow" do
 
   include EmailSpec::Helpers
   include EmailSpec::Matchers
