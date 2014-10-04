@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "task workflows" do
+describe "Task workflow" do
 
   include Warden::Test::Helpers
   Warden.test_mode!
@@ -24,10 +24,10 @@ describe "task workflows" do
   end
 
   describe "sucessfully" do
-    it "creates a task" do
+    it "completes a task" do
       @task = create(:task, user: @user)
       visit tasks_path
-      check "Completed"
+      find("input[type='checkbox']")
 
       expect( page ).to have_content('Todo completed!')
     end
