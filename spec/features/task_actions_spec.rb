@@ -27,7 +27,7 @@ describe "Task workflow" do
     it "completes a task" do
       @task = create(:task, user: @user)
       visit tasks_path
-      find("input[type='checkbox']")
+      check("task[completed]")
 
       expect( page ).to have_content('Todo completed!')
     end
