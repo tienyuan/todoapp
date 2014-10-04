@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe "Sign in workflow" do
 
-  describe "successful" do
+  describe "successfully" do
     it "redirects to the task index" do
     user = create(:user)
     visit root_path
@@ -19,11 +19,11 @@ describe "Sign in workflow" do
     end
   end
   
-  describe "unsuccessful" do
+  describe "unsuccessfully" do
     it "reminds user to login" do
     visit tasks_path
 
-    expect( page ).to have_content('Please sign in')
+    expect( page ).to have_content('Please sign in.')
     end
   end
 

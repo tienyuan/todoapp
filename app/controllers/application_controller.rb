@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
    policy_name = exception.policy.class.to_s.underscore
 
    flash[:error] = I18n.t "pundit.#{policy_name}.#{exception.query}",
-     default: 'Please login.'
+     default: 'Please sign in.'
    redirect_to(request.referrer || root_path)
  end
 

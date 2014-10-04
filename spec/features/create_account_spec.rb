@@ -8,6 +8,11 @@ describe "User workflow" do
   Warden.test_mode!
 
   describe "successful" do
+
+    before(:each) do
+      reset_mailer
+    end
+
     it "creates an user" do
       visit root_path
       click_link "Sign Up"
@@ -35,6 +40,7 @@ describe "User workflow" do
 
   after do
     Warden.test_reset!
+
   end
 
   private
