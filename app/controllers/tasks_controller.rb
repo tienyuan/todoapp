@@ -2,8 +2,8 @@ class TasksController < ApplicationController
 respond_to :html, :js
 
   def index
-    @tasks = current_user.try(:tasks)
-    authorize @tasks
+    authorize Task
+    @tasks = current_user.tasks
   end
 
   def show
@@ -58,5 +58,4 @@ respond_to :html, :js
   def task_params
     params.require(:task).permit(:description, :completed)
   end
-
 end
