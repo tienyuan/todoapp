@@ -14,7 +14,7 @@ Setup Instructions
 
 Clone this repository. 
 
-Then copy `config/application.example.yml` to `application.yml` and add values. These are the same enviroment config settings needed in production.
+Then copy `config/application.example.yml` to `application.yml` and add values. These are the same enviroment settings needed in production.
 
 Run `bundle install` to install all relevant gems.
 
