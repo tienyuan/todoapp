@@ -13,7 +13,7 @@ describe "User" do
       reset_mailer
     end
 
-    it "creating an user" do
+    it "creates an user" do
       visit root_path
       click_link "Sign Up"
       fill_in 'Email', with: "createusertest@example.com"
