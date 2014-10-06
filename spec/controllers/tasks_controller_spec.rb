@@ -20,11 +20,12 @@ describe TasksController do
 
   describe '#update-completed' do
     it "updates a task to completed" do
-      @task = create(:task)
-      expect( @task.completed ).to eq(false)
+      task = create(:task, user: @user)
+      expect( task.completed ).to eq(false)
 
-      post :edit, task:{ id: @task.id, completed: true}
-      expect( @task.completed ).to eq(true)
+      patch :update, id: task.id, task:{completed: true}
+      task.reload
+      expect( task.completed ).to eq(true)
     end
   end
 

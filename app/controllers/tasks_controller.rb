@@ -35,7 +35,11 @@ respond_to :html, :js
 
     if @task.update_attributes(task_params)
     else
-      redirect_to tasks_path
+      flash[:error] = "There was an error updating the todo."
+    end
+
+    respond_with(@task) do |format|
+      format.html { redirect_to tasks_path }
     end
   end
 
@@ -45,10 +49,8 @@ respond_to :html, :js
 
     if @task.destroy
       flash[:notice] = "Todo was deleted successfully."
-      redirect_to tasks_path
     else
       flash[:error] = "There was an error deleting the todo."
-      redirect_to tasks_path
     end
 
     respond_with(@task) do |format|
