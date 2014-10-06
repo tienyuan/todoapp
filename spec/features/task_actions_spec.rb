@@ -23,6 +23,21 @@ describe "Task workflow" do
     end
   end
 
+  describe "sucessfully" do
+    it "edits a task" do
+      @task = create(:task, description: 'old task', user: @user)
+      visit tasks_path
+      click_link "old task"
+      fill_in 'Description', with: ""
+      fill_in 'Description', with: "new task"
+
+      within 'form' do
+        click_button 'Submit'
+      end
+      expect( page ).to have_content('new task')
+    end
+  end
+
   describe "sucessfully", js: true do
     it "completes a task" do
       @task = create(:task, user: @user)

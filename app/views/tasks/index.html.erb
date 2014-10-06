@@ -14,7 +14,7 @@
       </tr>
       <% @tasks.each do |task| %>
       <tr id="taskrow-<%= task.id %>">
-        <td><%= task.description %></td>
+        <td><%= link_to task.description, edit_task_path(task.id), method: :edit %></td>
         <td><%= task.days_remaining %> days left</td>
         <td><%= form_for task, remote: true  do |f| %>
             <%= f.check_box 'completed', id: "task-#{task.id}", class: 'submittable' %>

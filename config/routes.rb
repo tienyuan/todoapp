@@ -1,5 +1,7 @@
 Todoapp::Application.routes.draw do
   resources :tasks
+  get 'tasks/:id/edit' => 'tasks#edit'
+  post 'tasks/:id/edit' => 'tasks#edit'
 
   devise_for :users
   resources  :users, only: [:update]

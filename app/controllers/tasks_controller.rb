@@ -23,6 +23,11 @@ respond_to :html, :js
     end
   end
 
+  def edit
+    @task = Task.find(params[:id])
+    authorize @task
+  end
+
   def update
     @task = Task.find(params[:id])
     authorize @task

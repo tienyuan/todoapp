@@ -38,7 +38,6 @@ RSpec.configure do |config|
   # instead of true.
   # config.use_transactional_fixtures = true
   # using database_cleaner gem
-
   config.include FactoryGirl::Syntax::Methods
 
   # RSpec Rails can automatically mix in different behaviours to your tests
