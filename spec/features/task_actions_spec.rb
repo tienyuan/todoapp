@@ -23,7 +23,7 @@ describe "Task workflow" do
     end
   end
 
-  describe "sucessfully" do
+  describe "sucessfully", js: true do
     it "completes a task" do
       @task = create(:task, user: @user)
       visit tasks_path

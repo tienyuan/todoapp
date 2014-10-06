@@ -53,6 +53,7 @@ end
 group :test do
   gem 'email_spec'
   gem 'simplecov', require: false
+  gem 'poltergeist'
 end
 
 group :production do
