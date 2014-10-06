@@ -4,9 +4,10 @@ describe Task do
 
   describe "class methods" do
     before do
-      @new_task = create(:task, created_at: Timecop.freeze(Time.now))
-      @old_task = create(:task, created_at: 7.days.ago)
-      @completed_task = create(:task, completed: true)
+      @user = create(:user)
+      @new_task = create(:task, user: @user, created_at: Timecop.freeze(Time.now))
+      @old_task = create(:task, user: @user, created_at: 7.days.ago)
+      @completed_task = create(:task, user: @user, completed: true)
     end
 
     describe '#expiration_date' do
@@ -35,18 +36,22 @@ describe Task do
       end
     end
 
-    describe '#validation' do  
-      it "does not allow empty description" do
-        task = Task.new(description: "", user: @user)
-        expect( task.save ).to eq(false)
-      end
-    end
-
     describe '.delete_tasks' do
       it "deletes old and completed tasks" do
         Task.delete_tasks
-        expect( Task.count ).to eq(1)
+        expect( Task.count ).to eq(1) #new_task should be the only one remaining
       end
+    end
+
+    describe "ActiveModel validations" do
+      it { expect(@new_task).to validate_presence_of(:description).with_message( /can't be blank/ ) }
+      it { ensure_inclusion_of(:completed).in_array([true, false]) }
+    end
+
+    describe "ActiveRecord associations" do
+      it { expect(@new_task).to belong_to(:user) }
+      it { expect(@user).to have_many(:tasks) }
+      it { expect(@new_task).to have_db_index(:user_id) } 
     end
   end
 end

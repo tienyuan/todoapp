@@ -10,8 +10,8 @@ describe "Task" do
     login_as(@user, :scope => :user)
   end
 
-  describe "sucessfully" do #try to avoid one word sucessfully, descriptions whould read like a sentence
-    it "creates a task" do
+  describe "creates" do
+    it "a task given a description" do
       visit tasks_path
       click_link "Create a New Todo"
       fill_in 'Description', with: "some task description here"
@@ -19,12 +19,13 @@ describe "Task" do
       within 'form' do
         click_button 'Submit'
       end
+      
       expect( page ).to have_content('Todo created!')
     end
   end
 
-  describe "sucessfully", js: true do
-    it "completes a task" do
+  describe "completes", js: true do
+    it "a task with a checkbox" do
       @task = create(:task, user: @user)
       visit tasks_path
       check("task[completed]")
