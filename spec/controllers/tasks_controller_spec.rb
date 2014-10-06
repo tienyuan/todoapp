@@ -32,11 +32,8 @@ describe TasksController do
   describe '#destroy' do
     it "deletes a task" do
       task = create(:task, user: @user)
-      expect( task.count ).to eq(1)
-
-      patch :destroy, id: task.id, task:{completed: true}
-      task.reload
-      expect( task ).to eq(nil)
+      delete :destroy, id: task.id
+      expect( Task.count ).to eq(0)
     end
   end
 

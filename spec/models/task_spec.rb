@@ -31,7 +31,7 @@ describe Task do
 
     describe '#hide_completed scope' do 
       it "does not include completed tasks" do
-        expect( Task.hide_completed ).not_to include(@completedtask)
+        expect( Task.hide_completed ).not_to include(@completed_task)
       end
     end
 
@@ -42,9 +42,11 @@ describe Task do
       end
     end
 
-    describe '#delete_tasks' do  
-      Task.delete_tasks
-      it { expect(Task.count).to eq(1) }
+    describe '.delete_tasks' do  
+      tasks = Task.all
+      it { expect( tasks.count ).to eq(3) }
+      Task.delete_items
+      it { expect( tasks.count ).to eq(1) }
     end
 
   end
