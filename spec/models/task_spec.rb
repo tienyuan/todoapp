@@ -42,12 +42,11 @@ describe Task do
       end
     end
 
-    describe '.delete_tasks' do  
-      tasks = Task.all
-      it { expect( tasks.count ).to eq(3) }
-      Task.delete_items
-      it { expect( tasks.count ).to eq(1) }
+    describe '.delete_tasks' do
+      it "deletes old and completed tasks" do
+        Task.delete_tasks
+        expect( Task.count ).to eq(1)
+      end
     end
-
   end
 end
