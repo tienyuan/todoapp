@@ -6,9 +6,6 @@ respond_to :html, :js
     @tasks = current_user.tasks.hide_completed
   end
 
-  def show
-  end
-
   def new
     @task = Task.new
     authorize @task
@@ -24,9 +21,6 @@ respond_to :html, :js
       flash[:error] = "Error creating todo. Please try again."
       render :new
     end
-  end
-
-  def edit
   end
 
   def update
