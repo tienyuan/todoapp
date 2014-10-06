@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "Task workflow" do
+describe "Task" do
 
   include Warden::Test::Helpers
   Warden.test_mode!
@@ -10,7 +10,7 @@ describe "Task workflow" do
     login_as(@user, :scope => :user)
   end
 
-  describe "sucessfully" do
+  describe "sucessfully" do #try to avoid one word sucessfully, descriptions whould read like a sentence
     it "creates a task" do
       visit tasks_path
       click_link "Create a New Todo"

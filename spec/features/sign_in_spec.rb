@@ -1,9 +1,9 @@
 require 'rails_helper'
 
-describe "Sign in workflow" do
+describe "Sign in" do
 
-  describe "successfully" do
-    it "redirects to the task index" do
+  describe "logs in" do
+    it "by authenticating user and showing todo list" do
     user = create(:user)
     visit root_path
 
@@ -19,8 +19,8 @@ describe "Sign in workflow" do
     end
   end
   
-  describe "unsuccessfully" do
-    it "reminds user to login" do
+  describe "catches unauthenticated users" do
+    it "and shows reminder to login" do
     visit tasks_path
 
     expect( page ).to have_content('Please sign in.')

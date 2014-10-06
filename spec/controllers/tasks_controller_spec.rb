@@ -19,13 +19,24 @@ describe TasksController do
   end
 
   describe '#update-completed' do
-    it "updates a task to completed" do
+    it "updates a task to be completed" do
       task = create(:task, user: @user)
       expect( task.completed ).to eq(false)
 
       patch :update, id: task.id, task:{completed: true}
       task.reload
       expect( task.completed ).to eq(true)
+    end
+  end
+
+  describe '#destroy' do
+    it "deletes a task" do
+      task = create(:task, user: @user)
+      expect( task.count ).to eq(1)
+
+      patch :destroy, id: task.id, task:{completed: true}
+      task.reload
+      expect( task ).to eq(nil)
     end
   end
 
