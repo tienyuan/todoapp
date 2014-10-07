@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "User list" do #rename to user_sees_list and add test for seeing a task correctly
+feature "User list" do #rename to user_sees_list and add test for seeing a task correctly
 
   include Warden::Test::Helpers
   Warden.test_mode!
@@ -10,14 +10,14 @@ describe "User list" do #rename to user_sees_list and add test for seeing a task
     login_as(@user, :scope => :user)
   end
 
-  describe "displays" do
-    it "a task description" do
+  feature "displays" do
+    scenario "a task description" do
       task = create(:task, description: 'task description', user: @user)
       visit tasks_path
       expect( page ).to have_content('task description')
     end
 
-    it "time left for a task" do
+    scenario "time left for a task" do
       task = create(:task, user: @user, created_at: 5.days.ago)
       visit tasks_path
       expect( page ).to have_content('2 days left')

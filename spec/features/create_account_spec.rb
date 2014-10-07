@@ -1,19 +1,19 @@
 require 'rails_helper'
 
-describe "User" do
+feature "User" do
 
   include EmailSpec::Helpers
   include EmailSpec::Matchers
   include Warden::Test::Helpers
   Warden.test_mode!
 
-  describe "signup form" do
+  feature "signup form" do
 
     before(:each) do
       reset_mailer
     end
 
-    it "creates an user" do
+    scenario "creates an user" do
       visit root_path
       click_link "Sign Up"
       fill_in 'Email', with: "createusertest@example.com"

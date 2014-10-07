@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "Task" do
+feature "Task" do
 
   include Warden::Test::Helpers
   Warden.test_mode!
@@ -10,8 +10,8 @@ describe "Task" do
     login_as(@user, :scope => :user)
   end
 
-  describe "creates" do
-    it "a task given a description" do
+  feature "creates" do
+    scenario "a task given a description" do
       visit tasks_path
       click_link "Create a New Todo"
       fill_in 'Description', with: "some task description here"
@@ -24,8 +24,8 @@ describe "Task" do
     end
   end
 
-  describe "completes", js: true do
-    it "a task with a checkbox" do
+  feature "completes", js: true do
+    scenario "a task with a checkbox" do
       @task = create(:task, user: @user)
       visit tasks_path
       check("task[completed]")

@@ -1,9 +1,9 @@
 require 'rails_helper'
 
-describe "Sign in" do
+feature "Sign in" do
 
-  describe "logs in" do
-    it "by authenticating user and showing todo list" do
+  feature "logs in" do
+    scenario "by authenticating user and showing todo list" do
     user = create(:user)
     visit root_path
 
@@ -19,8 +19,8 @@ describe "Sign in" do
     end
   end
   
-  describe "catches unauthenticated users" do
-    it "and shows reminder to login" do
+  feature "catches unauthenticated users" do
+    scenario "and shows reminder to login" do
     visit tasks_path
 
     expect( page ).to have_content('Please sign in.')
