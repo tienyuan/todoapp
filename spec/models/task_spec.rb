@@ -50,8 +50,8 @@ describe Task do
 
     describe "ActiveRecord associations" do
       it { expect(@new_task).to belong_to(:user) }
-      it { expect(@user).to have_many(:tasks) }
       it { expect(@new_task).to have_db_index(:user_id) } 
+      it { expect(@user).to have_many(:tasks) }
     end
   end
 end
