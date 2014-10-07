@@ -52,7 +52,7 @@ describe TasksController do
 
   describe '#update-completed' do
     it "updates a task to be completed" do
-      current_user.task = create(:task, user: @user)
+      task = create(:task, user: @user)
       expect( task.completed ).to eq(false)
 
       patch :update, id: task.id, task:{completed: true}
@@ -63,7 +63,7 @@ describe TasksController do
 
   describe '#destroy' do
     it "deletes a task" do
-      current_user.task = create(:task, user: @user)
+      task = create(:task, user: @user)
       delete :destroy, id: task.id
       expect( @user.tasks.count ).to eq(0)
     end
