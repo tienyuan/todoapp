@@ -26,14 +26,13 @@ feature "Task" do
 
   feature "completes", js: true do
     scenario "a task with a checkbox" do
-      @task = create(:task, user: @user)
+      current_user.task = create(:task, user: @user)
       visit tasks_path
       check("task[completed]")
 
       expect( page ).to have_content('Todo completed!')
     end
   end
-
 
   after do
     Warden.test_reset!
