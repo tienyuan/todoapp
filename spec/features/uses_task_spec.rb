@@ -26,7 +26,7 @@ feature "Task" do
 
   feature "completes", js: true do
     scenario "a task with a checkbox" do
-      current_user.task = create(:task, user: @user)
+      task = create(:task, user: @user)
       visit tasks_path
       check("task[completed]")
 
