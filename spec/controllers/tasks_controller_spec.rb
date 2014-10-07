@@ -41,6 +41,13 @@ describe TasksController do
       post :create, task:{ description: "Some test description", user: @user}
       expect( @user.tasks.count ).to eq(1)
     end
+
+    it "fails to create a task without a description" do
+      expect( @user.tasks.empty? ).to eq(true)
+
+      post :create, task:{ description: "", user: @user}
+      expect( @user.tasks.empty? ).to eq(true)
+    end
   end
 
   describe '#update-completed' do
