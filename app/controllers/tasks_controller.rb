@@ -4,6 +4,10 @@ respond_to :html, :js
   def index
     authorize Task
     @tasks = current_user.tasks.hide_completed
+
+    if @tasks.empty?
+      @message = "No todos are pending."
+    end
   end
 
   def new
