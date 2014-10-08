@@ -28,6 +28,7 @@ respond_to :html, :js
     authorize @task
 
     if @task.update_attributes(task_params)
+      flash[:notice] = "Todo completed!"
     else
       flash[:error] = "There was an error updating the todo."
     end

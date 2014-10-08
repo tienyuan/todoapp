@@ -28,7 +28,7 @@ feature "Task" do
     scenario "a task with a checkbox" do
       task = create(:task, user: @user)
       visit tasks_path
-      check("task[completed]")
+      click_button "X"
 
       expect( page ).to have_content('Todo completed!')
     end
