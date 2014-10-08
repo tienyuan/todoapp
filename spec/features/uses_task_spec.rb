@@ -24,7 +24,17 @@ feature "Task" do
     end
   end
 
-  feature "completes", js: true do
+  feature "completes with post" do
+    scenario "a task with a checkbox" do
+      task = create(:task, user: @user)
+      visit tasks_path
+      click_button "X"
+
+      expect( page ).to have_content('Todo completed!')
+    end
+  end
+
+  feature "completes with ajax", js: true do
     scenario "a task with a checkbox" do
       task = create(:task, user: @user)
       visit tasks_path
