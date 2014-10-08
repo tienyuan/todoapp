@@ -24,7 +24,7 @@ respond_to :html, :js
   end
 
   def update
-    @task = current_user.tasks.where(id: params[:id])
+    @task = current_user.tasks.find(params[:id])
     authorize @task
 
     if @task.update_attributes(task_params)
@@ -38,7 +38,7 @@ respond_to :html, :js
   end
 
   def destroy
-    @task = current_user.tasks.where(id: params[:id])
+    @task = current_user.tasks.find(params[:id])
     authorize @task
 
     if @task.destroy
