@@ -17,8 +17,9 @@
         <td><%= task.description %></td>
         <td><%= task.days_remaining %> days left</td>
         <td><%= form_for task, remote: true  do |f| %>
-            <%= f.check_box 'completed', id: "task-#{task.id}", class: 'submittable' %>
+            <%= f.check_box 'completed', id: "task-#{task.id}", class: 'submittable' %> 
         <% end %>
+            <%= button_to 'X', {action: "update", id: task.id, completed: true}, method: :patch %>
             </td>
       </tr>
       <% end %>
