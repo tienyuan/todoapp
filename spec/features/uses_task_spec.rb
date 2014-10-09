@@ -30,7 +30,7 @@ feature "User goes to task list to" do
     expect( page ).to have_content('Todo completed!')
   end
 
-  scenario "complete a task with ajax" do
+  scenario "complete a task with ajax", js: true do
     task = create(:task, user: @user)
     visit tasks_path
     click_button "X"

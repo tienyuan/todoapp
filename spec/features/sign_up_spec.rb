@@ -30,9 +30,25 @@ feature "Visitor signs up" do
     expect(current_path).to eq user_registration_path
   end
 
-  scenario "with blank username" do
-    sign_up_with('new_email@example', '', 'password')
+  scenario "with duplicate email" do
+    sign_up_with('new_email@example.com', 'new_username', 'password')
+    click_email_confirmation_link('new_email@example.com')
 
+    sign_up_with('new_email@example.com', 'other_username', 'password')
+    expect(current_path).to eq user_registration_path
+  end
+
+  scenario "with blank username" do
+    sign_up_with('new_email@example.com', '', 'password')
+
+    expect(current_path).to eq user_registration_path
+  end
+
+  scenario "with duplicate username" do
+    sign_up_with('new_email@example.com', 'new_username', 'password')
+    click_email_confirmation_link('new_email@example.com')
+
+    sign_up_with('other_email@example.com', 'new_username', 'password')
     expect(current_path).to eq user_registration_path
   end
 
