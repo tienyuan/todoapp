@@ -67,7 +67,7 @@ describe TasksController do
       expect(flash[:notice]).to eq "Todo completed!"
     end
 
-    it "fails to updates a task" do
+    it "fails to updates a task without a description" do
       task = create(:task, user: @user)     
       invalid_description = ""
       patch :update, id: task.id, task:{description: invalid_description}
@@ -85,6 +85,16 @@ describe TasksController do
       expect( response ).to redirect_to tasks_path
       expect(flash[:notice]).to eq "Todo was deleted successfully."
     end
+
+    it "fails to delete another user's task" do
+      @other_user = create(:user)
+      task = create(:task, user: @other_user)
+      delete :destroy, id: task.id
+
+      expect( response ).to redirect_to tasks_path
+      expect(flash[:error]).to eq "There was an error deleting the todo."
+    end
+
   end
 
 end
