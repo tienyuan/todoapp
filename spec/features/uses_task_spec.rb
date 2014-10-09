@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature "Task" do
+feature "User goes to task list to" do
 
   include Warden::Test::Helpers
   Warden.test_mode!
@@ -10,38 +10,32 @@ feature "Task" do
     login_as(@user, :scope => :user)
   end
 
-  feature "creates" do
-    scenario "a task given a description" do
-      visit tasks_path
-      click_link "Create a New Todo"
-      fill_in 'Description', with: "some task description here"
+  scenario "create a task with description" do
+    visit tasks_path
+    click_link "Create a New Todo"
+    fill_in 'Description', with: "some task description here"
 
-      within 'form' do
-        click_button 'Submit'
-      end
+    within 'form' do
+      click_button 'Submit'
+    end
       
-      expect( page ).to have_content('Todo created!')
-    end
+    expect( page ).to have_content('Todo created!')
   end
 
-  feature "completes with post" do
-    scenario "a task with a checkbox" do
-      task = create(:task, user: @user)
-      visit tasks_path
-      click_button "X"
+  scenario "complete a task" do
+    task = create(:task, user: @user)
+    visit tasks_path
+    click_button "X"
 
-      expect( page ).to have_content('Todo completed!')
-    end
+    expect( page ).to have_content('Todo completed!')
   end
 
-  feature "completes with ajax", js: true do
-    scenario "a task with a checkbox" do
-      task = create(:task, user: @user)
-      visit tasks_path
-      click_button "X"
+  scenario "complete a task with ajax", js: true do
+    task = create(:task, user: @user)
+    visit tasks_path
+    click_button "X"
 
-      expect( page ).to have_content('Todo completed!')
-    end
+    expect( page ).to have_content('Todo completed!')
   end
 
   after do
