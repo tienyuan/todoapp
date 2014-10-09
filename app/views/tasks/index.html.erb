@@ -6,21 +6,24 @@
 </div>
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
-    <table class="table table-striped">
-      <tr>
-        <th>Description</th>
-        <th width="15%">Days Left</th>
-        <th width="15%">Completed?</th>
-      </tr>
-      <% @tasks.each do |task| %>
-      <tr id="taskrow-<%= task.id %>">
-        <td><%= task.description %></td>
-        <td><%= task.days_remaining %> days left</td>
-        <td><%= button_to 'X', {action: "update", id: task.id, task:{completed: true}}, method: :patch, remote: true, class: "btn btn-sm btn-success" %>
-        </td>
-      </tr>
-      <% end %>
-    </table>
-    <div id="list-message"><%= @message %></div>
+    <% if @tasks.empty? %>
+      <div id="list-message">No todos are pending.</div>
+    <% else %>
+      <table class="table table-striped">
+        <tr>
+          <th>Description</th>
+          <th width="15%">Days Left</th>
+          <th width="15%">Completed?</th>
+        </tr>
+        <% @tasks.each do |task| %>
+          <tr id="taskrow-<%= task.id %>">
+            <td><%= task.description %></td>
+            <td><%= task.days_remaining %> days left</td>
+            <td><%= button_to 'X', {action: "update", id: task.id, task:{completed: true}}, method: :patch, remote: true, class: "btn btn-sm btn-success" %>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+    <% end %>    
   </div>
 </div>

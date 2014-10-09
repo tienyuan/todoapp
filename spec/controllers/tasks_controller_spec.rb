@@ -10,10 +10,12 @@ describe TasksController do
   end
 
   describe '#index' do
+    render_views
+
     it "shows a empty list" do
       get :index
       expect( response ).to have_http_status(:success)
-      expect( assigns(:message) ).to eq("No todos are pending.")
+      expect( response.body ).to include "No todos are pending."
     end
 
     it "shows a list of uncompleted tasks" do
@@ -36,6 +38,7 @@ describe TasksController do
   end
 
   describe '#create' do
+
     it "creates a task" do
       params = { description: "Some test description", user: @user}
       post :create, task: params
