@@ -69,7 +69,8 @@ describe TasksController do
 
     it "fails to updates a task" do
       task = create(:task, user: @user)     
-      patch :update, id: task.id, task:{completed: true}
+      invalid_description = ""
+      patch :update, id: task.id, task:{description: invalid_description}
 
       expect( response ).to redirect_to tasks_path
       expect(flash[:error]).to eq "There was an error updating the todo."
