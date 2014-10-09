@@ -87,14 +87,16 @@ describe TasksController do
     end
 
     it "fails to delete another user's task" do
-      @other_user = create(:user)
-      task = create(:task, user: @other_user)
-      delete :destroy, id: task.id
+      other_user = create(:user)
+      task = create(:task, user: other_user)
 
-      expect( response ).to redirect_to tasks_path
-      expect(flash[:error]).to eq "There was an error deleting the todo."
+      assert_raises(ActiveRecord::RecordNotFound) do
+        delete :destroy, id: task.id
+      end
+
+      task.reload
+      expect(task).not_to be_completed
+      expect(assigns(:task)).to be_nil
     end
-
   end
-
 end
