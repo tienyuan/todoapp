@@ -28,6 +28,7 @@ feature "Visitor signs up" do
     sign_up_with('new_email@example', 'new_username', 'password')
 
     expect(current_path).to eq user_registration_path
+    expect( page ).to have_content('Email is invalid')
   end
 
   scenario "with duplicate email" do
@@ -36,12 +37,14 @@ feature "Visitor signs up" do
 
     sign_up_with('new_email@example.com', 'other_username', 'password')
     expect(current_path).to eq user_registration_path
+    expect( page ).to have_content('Email has already been taken')
   end
 
   scenario "with blank username" do
     sign_up_with('new_email@example.com', '', 'password')
 
     expect(current_path).to eq user_registration_path
+    expect( page ).to have_content("Username can't be blank")
   end
 
   scenario "with duplicate username" do
@@ -50,12 +53,14 @@ feature "Visitor signs up" do
 
     sign_up_with('other_email@example.com', 'new_username', 'password')
     expect(current_path).to eq user_registration_path
+    expect( page ).to have_content('Username has already been taken')
   end
 
   scenario "with blank password" do
     sign_up_with('new_email@example.com', 'new_username', '')
 
     expect(current_path).to eq user_registration_path
+    expect( page ).to have_content("Password can't be blank")
   end
 
   after do
