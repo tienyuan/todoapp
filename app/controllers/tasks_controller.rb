@@ -29,10 +29,11 @@ respond_to :html, :js
   end
 
   def update
-    @task = Task.find(params[:id])
+    @task = current_user.tasks.find(params[:id])
     authorize @task
 
     if @task.update_attributes(task_params)
+      flash[:notice] = "Todo completed!"
     else
       flash[:error] = "There was an error updating the todo."
     end
@@ -43,7 +44,7 @@ respond_to :html, :js
   end
 
   def destroy
-    @task = Task.find(params[:id])
+    @task = current_user.tasks.find(params[:id])
     authorize @task
 
     if @task.destroy
