@@ -30,7 +30,7 @@ describe TasksController do
 
   describe '#new' do
     it "makes a new task without saving" do
-      post :new
+      get :new
 
       expect( response ).to have_http_status(:success)
       expect( response ).to render_template(:new)
@@ -45,6 +45,7 @@ describe TasksController do
 
       expect( response ).to redirect_to tasks_path
       expect(flash[:notice]).to eq "Todo created!"
+      expect( Task.last.description ).to eq("Some test description")
     end
 
     it "fails to create a task without a description" do
@@ -57,7 +58,7 @@ describe TasksController do
     end
   end
 
-  describe '#update-completed' do
+  describe '#update' do
     it "updates a task to be completed" do
       task = create(:task, user: @user)
       patch :update, id: task.id, task:{completed: true}
@@ -84,6 +85,7 @@ describe TasksController do
 
       expect( response ).to redirect_to tasks_path
       expect(flash[:notice]).to eq "Todo was deleted successfully."
+      expect( Task.count ).to eq(0)
     end
 
     it "fails to delete another user's task" do

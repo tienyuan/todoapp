@@ -39,7 +39,7 @@ describe Task do
     describe '.delete_tasks' do
       it "deletes old and completed tasks" do
         Task.delete_tasks
-        expect( Task.count ).to eq(1) #new_task should be the only one remaining
+        expect( Task.count ).to eq(1)
       end
     end
 
