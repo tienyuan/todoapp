@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Task do 
+describe User do 
 
   describe "class methods" do
     before do
