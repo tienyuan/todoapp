@@ -38,7 +38,6 @@ describe TasksController do
   end
 
   describe '#create' do
-
     it "creates a task" do
       params = { description: "Some test description", user: @user}
       post :create, task: params
@@ -66,6 +65,7 @@ describe TasksController do
 
       expect( response ).to redirect_to tasks_path
       expect(flash[:notice]).to eq "Todo completed!"
+      expect(task).to be_completed
     end
 
     it "fails to updates a task without a description" do
