@@ -7,7 +7,7 @@ feature 'User goes to task list to' do
 
   before do
     @user = create(:user)
-    login_as(@user, :scope => :user)
+    login_as(@user, scope: :user)
   end
 
   scenario 'create a task with description' do
@@ -18,7 +18,7 @@ feature 'User goes to task list to' do
     within 'form' do
       click_button 'Submit'
     end
-      
+
     expect(page).to have_content('Todo created!')
   end
 

@@ -1,30 +1,30 @@
 require 'rails_helper'
 
-feature "User goes to task list" do
+feature 'User goes to task list' do
 
   include Warden::Test::Helpers
   Warden.test_mode!
 
   before do
     @user = create(:user)
-    login_as(@user, :scope => :user)
+    login_as(@user, scope: :user)
   end
 
-  scenario "sees task description" do
-    task = create(:task, description: 'task description', user: @user)
+  scenario 'sees task description' do
+    create(:task, description: 'task description', user: @user)
     visit tasks_path
-    expect( page ).to have_content('task description')
+    expect(page).to have_content('task description')
   end
 
-  scenario "sees time left for a task" do
-    task = create(:task, user: @user, created_at: 5.days.ago)
+  scenario 'sees time left for a task' do
+    create(:task, user: @user, created_at: 5.days.ago)
     visit tasks_path
-    expect( page ).to have_content('2 days left')
+    expect(page).to have_content('2 days left')
   end
 
-  scenario "sees no tasks are listed" do
+  scenario 'sees no tasks are listed' do
     visit tasks_path
-    expect( page ).to have_content('No todos are pending.')
+    expect(page).to have_content('No todos are pending.')
   end
 
   after do

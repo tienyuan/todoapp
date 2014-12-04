@@ -18,7 +18,7 @@ describe 'todoapp rake task' do
   describe 'auto delete items' do
     let(:auto_delete_tasks) { 'auto_delete_tasks' }
 
-    it "only older than 7 days" do
+    it 'only older than 7 days' do
       run_rake_task
       expect(Task.count).to eq(1)
     end

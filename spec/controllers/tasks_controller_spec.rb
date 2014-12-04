@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe TasksController do
-  
+
   include Devise::TestHelpers
 
   before do
@@ -12,24 +12,24 @@ describe TasksController do
   describe '#index' do
     render_views
 
-    it "shows a empty list" do
+    it 'shows a empty list' do
       get :index
       expect(response).to have_http_status(:success)
-      expect(response.body).to include "No todos are pending."
+      expect(response.body).to include 'No todos are pending.'
     end
 
-    it "shows a list of uncompleted tasks" do
+    it 'shows a list of uncompleted tasks' do
       task = create(:task, user: @user)
-      task2 = create(:task, user: @user, completed: true)
-      
+      create(:task, user: @user, completed: true)
+
       get :index
-      expect(response ).to have_http_status(:success)
-      expect( (assigns(:tasks)) ).to eq([task])
+      expect(response).to have_http_status(:success)
+      expect((assigns(:tasks))).to eq([task])
     end
   end
 
   describe '#new' do
-    it "makes a new task without saving" do
+    it 'makes a new task without saving' do
       get :new
 
       expect(response).to have_http_status(:success)
@@ -38,57 +38,57 @@ describe TasksController do
   end
 
   describe '#create' do
-    it "creates a task" do
-      params = { description: "Some test description", user: @user}
+    it 'creates a task' do
+      params = { description: 'Some test description', user: @user }
       post :create, task: params
 
       expect(response).to redirect_to tasks_path
-      expect(flash[:notice]).to eq "Todo created!"
-      expect(Task.last.description).to eq("Some test description")
+      expect(flash[:notice]).to eq 'Todo created!'
+      expect(Task.last.description).to eq('Some test description')
     end
 
-    it "fails to create a task without a description" do
-      params = { description: "", user: @user}
+    it 'fails to create a task without a description' do
+      params = { description: '', user: @user }
       post :create, task: params
 
       expect(response).to have_http_status(:success)
       expect(response).to render_template(:new)
-      expect(flash[:error]).to eq "Error creating todo. Please try again."
+      expect(flash[:error]).to eq 'Error creating todo. Please try again.'
     end
   end
 
   describe '#update' do
-    it "updates a task to be completed" do
+    it 'updates a task to be completed' do
       task = create(:task, user: @user)
-      patch :update, id: task.id, task:{completed: true}
+      patch :update, id: task.id, task: { completed: true }
       task.reload
 
       expect(response).to redirect_to tasks_path
-      expect(flash[:notice]).to eq "Todo completed!"
+      expect(flash[:notice]).to eq 'Todo completed!'
       expect(task).to be_completed
     end
 
-    it "fails to updates a task without a description" do
-      task = create(:task, user: @user)     
-      invalid_description = ""
-      patch :update, id: task.id, task:{description: invalid_description}
+    it 'fails to updates a task without a description' do
+      task = create(:task, user: @user)
+      invalid_description = ''
+      patch :update, id: task.id, task: { description: invalid_description }
 
       expect(response).to redirect_to tasks_path
-      expect(flash[:error]).to eq "There was an error updating the todo."
+      expect(flash[:error]).to eq 'There was an error updating the todo.'
     end
   end
 
   describe '#destroy' do
-    it "deletes a task" do
+    it 'deletes a task' do
       task = create(:task, user: @user)
       delete :destroy, id: task.id
 
       expect(response).to redirect_to tasks_path
-      expect(flash[:notice]).to eq "Todo was deleted successfully."
+      expect(flash[:notice]).to eq 'Todo was deleted successfully.'
       expect(Task.count).to eq(0)
     end
 
-    it "fails to delete another user's task" do
+    it 'fails to delete another user\'s task' do
       other_user = create(:user)
       task = create(:task, user: other_user)
 
