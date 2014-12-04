@@ -8,7 +8,7 @@ describe User do
     end
 
     describe "ActiveModel validations" do
-      it { expect(@user).to validate_presence_of(:username).with_message( /can't be blank/ ) }
+      it { expect(@user).to validate_presence_of(:username).with_message(/can't be blank/) }
       it { expect(@user).to validate_uniqueness_of(:username) }
     end
 

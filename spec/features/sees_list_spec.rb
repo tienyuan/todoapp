@@ -30,5 +30,4 @@ feature "User goes to task list" do
   after do
     Warden.test_reset!
   end
-
 end
