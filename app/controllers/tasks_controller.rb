@@ -33,9 +33,7 @@ class TasksController < ApplicationController
       flash[:error] = 'There was an error updating the todo.'
     end
 
-    respond_with(@task) do |format|
-      format.html { redirect_to tasks_path }
-    end
+    respond_with_task
   end
 
   def destroy
@@ -47,15 +45,19 @@ class TasksController < ApplicationController
       flash[:error] = 'There was an error deleting the todo.'
     end
 
-    respond_with(@task) do |format|
-      format.html { redirect_to tasks_path }
-    end
+    respond_with_task
   end
 
   private
 
   def set_task
     @task = current_user.tasks.find(params[:id])
+  end
+
+  def respond_with_task
+    respond_with(@task) do |format|
+      format.html { redirect_to tasks_path }
+    end
   end
 
   def task_params
