@@ -1,5 +1,6 @@
 class TasksController < ApplicationController
-respond_to :html, :js
+  respond_to :html, :js
+  before_action :set_task, only: [:update, :destroy]
 
   def index
     authorize Task
@@ -16,21 +17,20 @@ respond_to :html, :js
     authorize @task
 
     if @task.save
-      redirect_to tasks_path, notice: "Todo created!"
+      redirect_to tasks_path, notice: 'Todo created!'
     else
-      flash[:error] = "Error creating todo. Please try again."
+      flash[:error] = 'Error creating todo. Please try again.'
       render :new
     end
   end
 
   def update
-    @task = current_user.tasks.find(params[:id])
     authorize @task
 
     if @task.update_attributes(task_params)
-      flash[:notice] = "Todo completed!"
+      flash[:notice] = 'Todo completed!'
     else
-      flash[:error] = "There was an error updating the todo."
+      flash[:error] = 'There was an error updating the todo.'
     end
 
     respond_with(@task) do |format|
@@ -39,13 +39,12 @@ respond_to :html, :js
   end
 
   def destroy
-    @task = current_user.tasks.find(params[:id])
     authorize @task
 
     if @task.destroy
-      flash[:notice] = "Todo was deleted successfully."
+      flash[:notice] = 'Todo was deleted successfully.'
     else
-      flash[:error] = "There was an error deleting the todo."
+      flash[:error] = 'There was an error deleting the todo.'
     end
 
     respond_with(@task) do |format|
@@ -54,6 +53,10 @@ respond_to :html, :js
   end
 
   private
+
+  def set_task
+    @task = current_user.tasks.find(params[:id])
+  end
 
   def task_params
     params.require(:task).permit(:description, :completed)

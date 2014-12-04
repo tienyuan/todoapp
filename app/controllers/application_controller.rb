@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
-  def after_sign_in_path_for(resource)
+  def after_sign_in_path_for(_resource)
     tasks_path
   end
 
@@ -20,11 +20,10 @@ class ApplicationController < ActionController::Base
   private
 
   def user_not_authorized(exception)
-   policy_name = exception.policy.class.to_s.underscore
+    policy_name = exception.policy.class.to_s.underscore
 
-   flash[:error] = I18n.t "pundit.#{policy_name}.#{exception.query}",
-     default: 'Please sign in.'
-   redirect_to(request.referrer || root_path)
- end
-
+    flash[:error] = I18n.t "pundit.#{policy_name}.#{exception.query}",
+      default: 'Please sign in.'
+    redirect_to(request.referrer || root_path)
+  end
 end
