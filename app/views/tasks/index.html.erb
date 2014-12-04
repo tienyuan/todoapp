@@ -1,6 +1,10 @@
+<% @page_title = capture do %>
+Todos - Todo App
+<% end %>
+
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
-    <h1 class="text-center"><%= current_user.username.titleize << "'s"|| "My" %> Todo List</h1>
+    <h1 class="text-center"><%= current_user.username.titleize << "'s"|| "My" %> Todos</h1>
     <p><%= link_to "Create a New Todo", new_task_path, class: "btn btn-small btn-primary" %></p>
   </div>
 </div>
